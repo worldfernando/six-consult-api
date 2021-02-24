@@ -25,6 +25,21 @@ namespace SixConsultApi.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Login
+        /// </summary>
+        /// <remarks>
+        /// Parameters:
+        ///
+        ///     POST /login
+        ///     {
+        ///        "email": "",
+        ///        "password": ""
+        ///     }
+        ///
+        /// </remarks>
+        /// <param name="userParam"></param>
+        /// <returns></returns>
         [HttpPost("login")]
         public IActionResult Authenticate([FromBody] LoginUserDto loginUserDto)
         {
@@ -36,6 +51,22 @@ namespace SixConsultApi.Controllers
             return Ok(_mapper.Map<UserLoggedDto>(user));
         }
 
+        /// <summary>
+        /// Register
+        /// </summary>
+        /// <remarks>
+        /// Parameters:
+        ///
+        ///     POST /register
+        ///     {
+        ///        "name":"", 
+        ///        "email": "",
+        ///        "password": ""
+        ///     }
+        ///
+        /// </remarks>
+        /// <param name="userParam"></param>
+        /// <returns></returns>
         [HttpPost("register")]
         public IActionResult Register([FromBody] RegisterUserDto registerUserDto)
         {

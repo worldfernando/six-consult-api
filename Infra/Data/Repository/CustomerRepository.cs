@@ -5,6 +5,7 @@ using SixConsultApi.Domain.Entities;
 using SixConsultApi.Helpers;
 using SixConsultApi.Infra.Data.Context;
 using SixConsultApi.Infra.Data.Repository.interfaces;
+using System.Linq;
 
 namespace SixConsultApi.Infra.Data.Repository
 {
@@ -18,6 +19,12 @@ namespace SixConsultApi.Infra.Data.Repository
             _appSettings = appSettings.Value;
             _context = context;
             _mapper = mapper;
+        }
+
+        override
+        public Customer GetById(int id)
+        {
+            return _context.Customer.AsQueryable().Where(x => x.Id == id).FirstOrDefault();
         }
     }
 }

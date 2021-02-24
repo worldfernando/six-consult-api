@@ -61,7 +61,7 @@ namespace SixConsultApi.Infra.Data.Repository
         virtual public void AfterUpdate(T objectInstance)
         {
         }
-        public T GetById(int id)
+        virtual public T GetById(int id)
         {
             throw new System.NotImplementedException();
         }
