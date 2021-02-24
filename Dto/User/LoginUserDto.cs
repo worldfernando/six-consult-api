@@ -10,11 +10,6 @@ namespace SixConsultApi.Dto.User
         public string email { get; set; }
         public string password { get; set; }
 
-        public LoginUserDto()
-        {
-            
-        }
-
         public LoginUserDto(string email, string password)
         {
             this.email = email;

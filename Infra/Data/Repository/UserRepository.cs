@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using SixConsultApi.Domain.Entities;
 using SixConsultApi.Helpers;
 using SixConsultApi.Infra.Data.Context;
 using SixConsultApi.Infra.Data.Repository.interfaces;
@@ -19,6 +20,11 @@ namespace SixConsultApi.Infra.Data.Repository
             _appSettings = appSettings.Value;
             _context = context;
             _mapper = mapper;
+        }
+
+        public User GetByEmail(string email)
+        {
+            return _context.User.AsQueryable().Where(x => x.Email == email).FirstOrDefault();
         }
 
         public Domain.Entities.User GetByEmailAndPassword(string email, string password)

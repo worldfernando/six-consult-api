@@ -8,6 +8,7 @@ using SixConsultApi.Domain.Entities;
 using SixConsultApi.Infra.Data.Repository.interfaces;
 using Microsoft.AspNetCore.Mvc;
 using SixConsultApi.Helpers.Interfaces;
+using System;
 
 namespace SixConsultApi.Service
 {
@@ -30,21 +31,32 @@ namespace SixConsultApi.Service
 
         public UserLoggedDto Login(LoginUserDto loginUserDto)
         {
-            string passwordHash = _hashService.HashPassword(loginUserDto.password);
-            var user = _userRepository.GetByEmailAndPassword(email: loginUserDto.email, password: passwordHash);
+            var user = _userRepository.GetByEmail(email: loginUserDto.email);
             if (user == null) 
             {
                 return null;
             }
+            string passwordHash = _hashService.HashPassword(loginUserDto.password);
+            bool valid = _hashService.Verify(loginUserDto.password, passwordHash);
+            if (!valid)
+            {
+                return null;
+            }
             var token = _jwtService.GenerateJwtToken(secret: _appSettings.Secret, claimId: user.Id.ToString());
-            var userLogged = new UserLoggedDto(Name: user.Name, Email: user.Email, Token: token.ToString());
+            var userLogged = new UserLoggedDto(user.Id, Name: user.Name, Email: user.Email, Token: token.ToString());
             return userLogged;
         }
 
         public UserDto Register(RegisterUserDto registerUserDto)
         {
+            var user = _userRepository.GetByEmail(registerUserDto.Email);
+            if (user != null)
+            {
+                throw new SixBusinessException("Email já cadastrado");
+            }
             string passwordHash = _hashService.HashPassword(registerUserDto.Password);
-            var user = _userRepository.Post(new User(name: registerUserDto.Name, email: registerUserDto.Email, password: passwordHash));
+            user = _userRepository.Post(new User(name: registerUserDto.Name, email: registerUserDto.Email, password: passwordHash));
+            Console.WriteLine(user.Id);
             return _mapper.Map<UserDto>(user);
         }
     }

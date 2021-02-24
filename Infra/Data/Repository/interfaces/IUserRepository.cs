@@ -9,5 +9,6 @@ namespace SixConsultApi.Infra.Data.Repository.interfaces
     public interface IUserRepository : IRepository<User>
     {
         User GetByEmailAndPassword(string email, string password);
+        User GetByEmail(string email);
     }
 }

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +21,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SixConsultApi.Domain.Entities;
 using SixConsultApi.Dto.ProfilerMapper;
+using SixConsultApi.Dto.User;
+using SixConsultApi.Dto.Validations;
 using SixConsultApi.Helpers;
 using SixConsultApi.Helpers.Interfaces;
 using SixConsultApi.Infra.Data.Context;
@@ -45,13 +48,9 @@ namespace SixConsultApi
             #region Validation
             services.AddMvc()
                 .AddFluentValidation(fv => {
-                    fv.RegisterValidatorsFromAssemblyContaining<LoginUserDto>();
+                    fv.RegisterValidatorsFromAssemblyContaining<Startup>();
                 });
             //Filter of Validation
-            services.AddMvc(opt =>
-            {
-                opt.Filters.Add(typeof(ValidatorActionFilter));
-            });
             #endregion
             #region Db Conection
             services.AddDbContext<ContextDB>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
@@ -138,7 +137,7 @@ namespace SixConsultApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ContextDB dataContext)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -149,9 +148,6 @@ namespace SixConsultApi
                     c.RoutePrefix = string.Empty;
                 });
             }
-
-            //dataContext.Database.Migrate();
-
             //app.UseHttpsRedirection();
 
             app.UseRouting();

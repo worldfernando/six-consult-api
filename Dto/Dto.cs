@@ -7,6 +7,6 @@ namespace SixConsultApi.Dto
 {
     public class Dto
     {
-        public long Id { get; }
+        public long Id { get; set; }
     }
 }

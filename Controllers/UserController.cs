@@ -33,18 +33,26 @@ namespace SixConsultApi.Controllers
             if (user == null)
                 return BadRequest(new { StatusCode = HttpStatusCode.BadRequest, message = "Usuário e senha inválidos" });
 
-            return Ok(_mapper.Map<UserDto>(user));
+            return Ok(_mapper.Map<UserLoggedDto>(user));
         }
 
         [HttpPost("register")]
         public IActionResult Register([FromBody] RegisterUserDto registerUserDto)
         {
-            var user = _userService.Register(registerUserDto);
+            try
+            {
+                var user = _userService.Register(registerUserDto);
 
-            if (user == null)
-                return BadRequest(new { StatusCode = HttpStatusCode.BadRequest, message = "Usuário não registrado" });
+                if (user == null)
+                    return BadRequest(new { StatusCode = HttpStatusCode.BadRequest, message = "Usuário não registrado" });
 
-            return Ok(_mapper.Map<UserDto>(user));
+                return Ok(_mapper.Map<UserDto>(user));
+            } catch (Exception e)
+            {
+                return BadRequest(new { StatusCode = HttpStatusCode.PreconditionFailed, message = e.Message });
+            }
+            
+            
         }
     }
 }

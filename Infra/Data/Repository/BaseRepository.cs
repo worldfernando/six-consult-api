@@ -40,7 +40,7 @@ namespace SixConsultApi.Infra.Data.Repository
             BeforePost(objectInstance);
             _context.Add(objectInstance);
             _context.SaveChanges();
-            AfterDelete(objectInstance);
+            AfterPost(objectInstance);
             return objectInstance;
         }
         virtual public void AfterPost(T objectInstance)

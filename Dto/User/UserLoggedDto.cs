@@ -5,17 +5,20 @@ using System.Threading.Tasks;
 
 namespace SixConsultApi.Dto.User
 {
-    public class UserLoggedDto: Dto
-    {        
-        public string Name { get; }
-        public string Email { get; }
-        public string Token { get; }
+    public class UserLoggedDto : Dto
+    {
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Token { get; set; }
 
-        public UserLoggedDto(string Name, string Email, string Token)
+        public UserLoggedDto(long id, string Name, string Email, string Token)
         {
+            this.Id = id;
             this.Name = Name;
             this.Email = Email;
             this.Token = Token;
         }
+
+
     }
 }

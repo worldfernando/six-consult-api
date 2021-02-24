@@ -7,9 +7,8 @@ namespace SixConsultApi.Dto.User
 {
     public class UserDto: Dto
     {        
-        public string Name { get; }
-        public string Email { get; }
-
+        public string Name { get; set; }
+        public string Email { get; set; }
         public UserDto(string Name, string Email)
         {
             this.Name = Name;
