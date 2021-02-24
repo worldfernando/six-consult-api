@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace SixConsultApi.Infra.Data.Repository
 {
-    public class UserRepository : BaseRepository<User>, IUserRepository
+    public class UserRepository : BaseRepository<Domain.Entities.User>, IUserRepository
     {
         private readonly AppSettings _appSettings;
         private readonly IMapper _mapper;
@@ -20,6 +20,10 @@ namespace SixConsultApi.Infra.Data.Repository
             _context = context;
             _mapper = mapper;
         }
-        
+
+        public Domain.Entities.User GetByEmailAndPassword(string email, string password)
+        {
+            return _context.User.AsQueryable().Where(x => x.Email == email && x.Password == password).FirstOrDefault();
+        }
     }
 }
