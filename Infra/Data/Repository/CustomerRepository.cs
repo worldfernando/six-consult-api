@@ -8,7 +8,7 @@ using SixConsultApi.Infra.Data.Repository.interfaces;
 
 namespace SixConsultApi.Infra.Data.Repository
 {
-    public class CustomerRepository<Customer> : BaseRepository<Customer>
+    public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
     {
         private readonly AppSettings _appSettings;
         private readonly IMapper _mapper;
