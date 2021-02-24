@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SixConsultApi.Infra.Data.Repository.interfaces
 {
-    interface IUserRepository : IRepository<User>
+    public interface IUserRepository : IRepository<User>
     {
         User GetByEmailAndPassword(string email, string password);
     }

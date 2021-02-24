@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SixConsultApi.Service.Interfaces
 {
-    interface ICustomerService
+    public interface ICustomerService
     {
     }
 }

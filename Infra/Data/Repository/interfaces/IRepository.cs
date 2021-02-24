@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SixConsultApi.Infra.Data.Repository.interfaces
 {
-    interface IRepository<T>    {
+    public interface IRepository<T>    {
         T GetById(int id);
         void BeforeDelete(T objectInstance);
         T Delete(T objectInstance);

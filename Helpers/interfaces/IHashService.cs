@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SixConsultApi.Helpers.Interfaces
 {
-    interface IHashService
+    public interface IHashService
     {
         string HashPassword(string password);
 

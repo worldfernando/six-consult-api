@@ -7,11 +7,11 @@ namespace SixConsultApi.Dto.Validations
     {
         public LoginUserDtoValidator()
         {
-            RuleFor(x => x.Email)
+            RuleFor(x => x.email)
                 .NotEmpty()
                 .WithMessage("Email não informado");
 
-            RuleFor(x => x.Password)
+            RuleFor(x => x.password)
                 .NotEmpty()
                 .WithMessage("Senha não informada");
         }

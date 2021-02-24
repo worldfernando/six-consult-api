@@ -2,7 +2,7 @@
 
 namespace SixConsultApi.Service.Interfaces
 {
-    interface IUserService
+    public interface IUserService
     {
         UserLoggedDto Login(LoginUserDto loginUserDto);
         UserDto Register(RegisterUserDto registerUserDto);

@@ -7,7 +7,7 @@ namespace SixConsultApi.Dto.ProfilerMapper
     {
         public ProfileMapper()
         {
-            CreateMap<SixConsultApi.Domain.Entities.Customer, UserDto>();
+            CreateMap<SixConsultApi.Domain.Entities.User, UserDto>();
         }
     }
 }

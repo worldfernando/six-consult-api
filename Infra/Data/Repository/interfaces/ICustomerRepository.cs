@@ -2,7 +2,7 @@
 
 namespace SixConsultApi.Infra.Data.Repository.interfaces
 {
-    interface ICustomerRepository : IRepository<Customer>
+    public interface ICustomerRepository : IRepository<Customer>
     {
 
     }

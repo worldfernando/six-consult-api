@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SixConsultApi.Helpers.Interfaces
 {
-    interface IJwtService
+    public interface IJwtService
     {
         string GenerateJwtToken(string secret, string claimId);
     }

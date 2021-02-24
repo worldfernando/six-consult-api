@@ -95,8 +95,8 @@ namespace SixConsultApi.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)")
                         .HasColumnName("password");
 
                     b.Property<DateTime>("UpdatedAt")

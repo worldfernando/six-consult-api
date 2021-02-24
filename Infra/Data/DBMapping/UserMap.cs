@@ -27,7 +27,7 @@ namespace SixConsultApi.Infra.Data.DBMapping
                 .HasColumnName("email");
             builder.Property(p => p.Password)
                 .IsRequired()
-                .HasMaxLength(50)
+                .HasMaxLength(255)
                 .HasColumnName("password");
             builder.Property(p => p.CreatedAt)
                 .IsRequired()
