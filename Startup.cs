@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using FluentValidation.AspNetCore;
 using LinqToDB;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -41,6 +42,17 @@ namespace SixConsultApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            #region Validation
+            services.AddMvc()
+                .AddFluentValidation(fv => {
+                    fv.RegisterValidatorsFromAssemblyContaining<LoginUserDto>();
+                });
+            //Filter of Validation
+            services.AddMvc(opt =>
+            {
+                opt.Filters.Add(typeof(ValidatorActionFilter));
+            });
+            #endregion
             #region Db Conection
             services.AddDbContext<ContextDB>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             #endregion

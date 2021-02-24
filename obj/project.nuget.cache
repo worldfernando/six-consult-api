@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "/ASYJ3fsJO+7y5K9C9h5U4OnFuSxL8pnHAoCxGGM2ZNeJsns9S7ft2nG2OmG1ZeqMCt++/DYJH9uuYp9pcqSqw==",
+  "dgSpecHash": "+HkfTAHb4X5NMaaYZ9vjuqvEcBwM9AK9EaJ2//wvOReCoTu7ZbyyhSNHIOlTzxX8+kPRSJ9yMqjeqvuXlI/kGw==",
   "success": true,
   "projectFilePath": "/home/fernando/Projetos/six-consult-api/SixConsultApi.csproj",
   "expectedPackageFiles": [
@@ -38,6 +38,7 @@
     "/home/fernando/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "/home/fernando/.nuget/packages/microsoft.netcore.targets/1.1.0/microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "/home/fernando/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",
+    "/home/fernando/.nuget/packages/newtonsoft.json/12.0.3/newtonsoft.json.12.0.3.nupkg.sha512",
     "/home/fernando/.nuget/packages/npgsql/5.0.2/npgsql.5.0.2.nupkg.sha512",
     "/home/fernando/.nuget/packages/npgsql.entityframeworkcore.postgresql/5.0.2/npgsql.entityframeworkcore.postgresql.5.0.2.nupkg.sha512",
     "/home/fernando/.nuget/packages/swashbuckle.aspnetcore/5.6.3/swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
