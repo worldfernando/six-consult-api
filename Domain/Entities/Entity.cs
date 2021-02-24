@@ -7,7 +7,6 @@ namespace SixConsultApi.Domain.Entities
 {
     public abstract class Entity
     {
-        [System.ComponentModel.DataAnnotations.Key]
         public long Id { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
         public DateTime UpdatedAt { get; protected set; }

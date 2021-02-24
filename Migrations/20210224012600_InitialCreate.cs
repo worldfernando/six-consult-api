@@ -16,7 +16,7 @@ namespace SixConsultApi.Migrations
                 schema: "public",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     ftni = table.Column<long>(type: "bigint", maxLength: 14, nullable: false),
                     name = table.Column<string>(type: "character varying(60)", maxLength: 60, nullable: false),
@@ -28,7 +28,7 @@ namespace SixConsultApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("id", x => x.Id);
+                    table.PrimaryKey("PK_customers", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -36,7 +36,7 @@ namespace SixConsultApi.Migrations
                 schema: "public",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     name = table.Column<string>(type: "character varying(60)", maxLength: 60, nullable: false),
                     email = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
@@ -46,7 +46,7 @@ namespace SixConsultApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("id", x => x.Id);
+                    table.PrimaryKey("PK_users", x => x.id);
                 });
         }
 

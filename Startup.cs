@@ -112,16 +112,16 @@ namespace SixConsultApi
 
             // configure DI for application services
             #region Repositories
-            //services.AddScoped<IUserRepository, UserRepository<User>>();
-            //services.AddScoped<ICustomerRepository, CustomerRepository<Customer>>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
             #endregion
             #region Services
-            //services.AddScoped<ICustomerService, CustomerService>();
-            //services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IUserService, UserService>();
             #endregion
             #region Helpers
-            //services.AddScoped<IHashService, HashService>();
-            //services.AddScoped<IJwtService, JwtService>();
+            services.AddScoped<IHashService, HashService>();
+            services.AddScoped<IJwtService, JwtService>();
             #endregion
         }
 
@@ -132,12 +132,15 @@ namespace SixConsultApi
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SixConsultApi v1"));
+                app.UseSwaggerUI(c => {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "SixConsultApi v1");
+                    c.RoutePrefix = string.Empty;
+                });
             }
 
             //dataContext.Database.Migrate();
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 

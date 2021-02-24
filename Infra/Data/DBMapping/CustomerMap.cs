@@ -9,9 +9,9 @@ namespace SixConsultApi.Infra.Data.DBMapping
         public void Configure(EntityTypeBuilder<Customer> builder)
         {
             builder.ToTable("customers");
-            builder.HasKey(k => k.Id)
-                .HasName("id");
+            builder.HasKey(k => k.Id);
             builder.Property(p => p.Id)
+                .HasColumnName("id")
                 .ValueGeneratedOnAdd();
             builder.Property(p => p.FTIN)
                 .IsRequired()

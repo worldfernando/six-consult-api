@@ -19,7 +19,7 @@ namespace SixConsultApi.Service
         private readonly IJwtService _jwtService;
         private readonly IHashService _hashService;
 
-        public UserService([FromServices] UserRepository<Customer> userRepository, IMapper mapper, IOptions<AppSettings> appSettings)
+        public UserService([FromServices] UserRepository<User> userRepository, IMapper mapper, IOptions<AppSettings> appSettings)
         {
             _appSettings = appSettings.Value;
             _mapper = mapper;
