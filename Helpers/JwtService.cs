@@ -9,7 +9,7 @@ namespace SixConsultApi.Helpers
 {
     public class JwtService : IJwtService
     {
-        public string GenerateJwtToken(string secret, string claimId)
+        public string GenerateJwtToken(string secret, string claimId, bool isAdmin)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(secret);
@@ -18,6 +18,7 @@ namespace SixConsultApi.Helpers
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.Name, claimId),
+                    new Claim(ClaimTypes.Role, isAdmin ? "admin" : "user" ),
                 }),
                 Expires = DateTime.UtcNow.AddHours(2),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

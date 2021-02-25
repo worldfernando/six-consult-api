@@ -125,10 +125,12 @@ namespace SixConsultApi
             #region Repositories
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IProfileRepository, ProfileRepository>();
             #endregion
             #region Services
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IProfileService, ProfileService>();
             #endregion
             #region Helpers
             services.AddScoped<IHashService, HashService>();

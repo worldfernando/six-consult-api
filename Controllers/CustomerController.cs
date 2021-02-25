@@ -7,20 +7,28 @@ using System.Linq;
 using SixConsultApi.Dto.Customer;
 using System.Net;
 using SixConsultApi.Domain.Entities;
+using SixConsultApi.Helpers;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SixConsultApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CustomerController : Controller
     {
         private readonly ICustomerService _customerService;
+        private readonly IUserService _userService;
         private readonly IMapper _mapper;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public CustomerController(ICustomerService customerService, IMapper mapper)
+        public CustomerController(ICustomerService customerService, IUserService userService, IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
             this._customerService = customerService;
+            this._userService = userService;
             this._mapper = mapper;
+            this._httpContextAccessor = httpContextAccessor;
         }
 
         // GET api/<controller>/5
@@ -46,7 +54,13 @@ namespace SixConsultApi.Controllers
         {
             try
             {
-                var customer = new Customer(customerDto.FTIN, customerDto.Name, customerDto.TradeName, customerDto.ContactEmail, customerDto.ContactPhone);
+                var tools = new SixTools(_httpContextAccessor);
+                var user = _userService.GetById(tools.GetUserTokenId());
+                if (user == null)
+                    return BadRequest(new { StatusCode = HttpStatusCode.BadRequest, message = "Usuário não localizado" });
+                if (!user.Profile.Create)
+                    return BadRequest(new { StatusCode = HttpStatusCode.BadRequest, message = "Usuário não possui permissão para realizar esta operacao" });
+                var customer = new Customer(customerDto.FTIN, customerDto.Name, customerDto.TradeName, customerDto.ContactEmail, customerDto.ContactPhone, userCreatedId: tools.GetUserTokenId(), userUpdatedId: tools.GetUserTokenId());
                 _customerService.Post(customer);
                 return Ok(_mapper.Map<CustomerDto>(customer));
             }
@@ -67,8 +81,25 @@ namespace SixConsultApi.Controllers
         {
             try
             {
-                var customer = new Customer(customerDto.FTIN, customerDto.Name, customerDto.TradeName, customerDto.ContactEmail, customerDto.ContactPhone);
-                _customerService.Post(customer);
+                var tools = new SixTools(_httpContextAccessor);
+                var user = _userService.GetById(tools.GetUserTokenId());
+                if (user == null)
+                    return BadRequest(new { StatusCode = HttpStatusCode.BadRequest, message = "Usuário não localizado" });
+                if (!user.Profile.Update)
+                    return BadRequest(new { StatusCode = HttpStatusCode.BadRequest, message = "Usuário não possui permissão para realizar esta operacao" });
+                var customer = _customerService.GetById(id);
+                if (customer == null)
+                    return BadRequest(new { StatusCode = HttpStatusCode.BadRequest, message = "Cliente não localizado" });
+                    
+                customer.FTIN = customerDto.FTIN;
+                customer.Name = customerDto.Name;
+                customer.TradeName = customerDto.TradeName;
+                customer.ContactEmail = customerDto.ContactEmail;
+                customer.ContactPhone = customerDto.ContactPhone;
+                customer.UserUpdatedId = user.Id;
+                customer.UpdatedAt = DateTime.Now;
+
+                _customerService.Update(customer);
                 return Ok(_mapper.Map<CustomerDto>(customer));
             }
             catch (Exception e)
@@ -88,6 +119,12 @@ namespace SixConsultApi.Controllers
         {
             try
             {
+                var tools = new SixTools(_httpContextAccessor);
+                var user = _userService.GetById(tools.GetUserTokenId());
+                if (user == null)
+                    return BadRequest(new { StatusCode = HttpStatusCode.BadRequest, message = "Usuário não localizado" });
+                if (!user.Profile.Delete)
+                    return BadRequest(new { StatusCode = HttpStatusCode.BadRequest, message = "Usuário não possui permissão para realizar esta operacao" });
                 var customer = _customerService.GetById(id);
                 if (customer == null)
                     return BadRequest(new { StatusCode = HttpStatusCode.BadRequest, message = "Cliente não localizado" });

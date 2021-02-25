@@ -9,7 +9,7 @@ namespace SixConsultApi.Domain.Entities
     {
         public long Id { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
-        public DateTime UpdatedAt { get; protected set; }
+        public DateTime UpdatedAt { get; set; }
         [NotMapped]
         public bool Valid { get; private set; }
         [NotMapped]

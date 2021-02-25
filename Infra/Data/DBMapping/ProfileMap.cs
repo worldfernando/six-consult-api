@@ -4,11 +4,11 @@ using SixConsultApi.Domain.Entities;
 
 namespace SixConsultApi.Infra.Data.DBMapping
 {
-    public class UserMap : IEntityTypeConfiguration<User>
+    public class ProfileMap : IEntityTypeConfiguration<Profile>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<Profile> builder)
         {
-            builder.ToTable("users");
+            builder.ToTable("profiles");
             builder.HasKey(k => k.Id);                
             builder.Property(p => p.Id)
                 .HasColumnName("id")
@@ -17,26 +17,27 @@ namespace SixConsultApi.Infra.Data.DBMapping
                 .IsRequired()
                 .HasMaxLength(60)
                 .HasColumnName("name");
-            builder.Property(p => p.Email)
+            builder.Property(p => p.Create)
                 .IsRequired()
-                .HasMaxLength(50)
-                .HasColumnName("email");
-            builder.Property(p => p.Password)
+                .HasColumnName("create");
+            builder.Property(p => p.Update)
                 .IsRequired()
-                .HasMaxLength(255)
-                .HasColumnName("password");
+                .HasColumnName("update");
+            builder.Property(p => p.Delete)
+                .IsRequired()
+                .HasColumnName("delete");
+            builder.Property(p => p.IsAdmin)
+                .IsRequired()
+                .HasColumnName("is_admin");
             builder.Property(p => p.CreatedAt)
                 .IsRequired()
                 .HasColumnName("created_at");
             builder.Property(p => p.UpdatedAt)
-                    .IsRequired()
-                    .HasColumnName("updated_at");
-            builder.Property(p => p.ProfileId)
                 .IsRequired()
-                .HasColumnName("profile_id");
-            builder.HasOne(p => p.Profile)
-                .WithMany(b => b.Users)
-                .HasForeignKey(e => e.ProfileId);
+                .HasColumnName("updated_at");
+            builder.HasMany(g => g.Users)
+                .WithOne(w => w.Profile)
+                .HasForeignKey(k => k.ProfileId);
         }
     }
 }

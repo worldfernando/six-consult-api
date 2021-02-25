@@ -10,12 +10,14 @@ namespace SixConsultApi.Dto.User
         public string Name { get; }
         public string Email { get; }
         public string Password { get; set; }
+        public long ProfileId { get; set; }
 
-        public RegisterUserDto(string Name, string Email, string Password)
+        public RegisterUserDto(string Name, string Email, string Password, long profileId)
         {
             this.Name = Name;
             this.Email = Email;
             this.Password = Password;
+            this.ProfileId = profileId;
         }
     }
 }

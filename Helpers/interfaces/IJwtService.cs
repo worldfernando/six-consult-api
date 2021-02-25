@@ -7,6 +7,6 @@ namespace SixConsultApi.Helpers.Interfaces
 {
     public interface IJwtService
     {
-        string GenerateJwtToken(string secret, string claimId);
+        string GenerateJwtToken(string secret, string claimId, bool isAdmin);
     }
 }

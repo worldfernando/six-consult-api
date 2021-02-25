@@ -29,6 +29,16 @@ namespace SixConsultApi.Service
             _userRepository = userRepository;
         }
 
+        public User Delete(User objectInstance)
+        {
+            return _userRepository.Delete(objectInstance);
+        }
+
+        public User GetById(int id)
+        {
+            return _userRepository.GetById(id);
+        }
+
         public UserLoggedDto Login(LoginUserDto loginUserDto)
         {
             var user = _userRepository.GetByEmail(email: loginUserDto.email);
@@ -38,9 +48,15 @@ namespace SixConsultApi.Service
             bool valid = _hashService.Verify(loginUserDto.password, passwordHash);
             if (!valid)
                 return null;
-            var token = _jwtService.GenerateJwtToken(secret: _appSettings.Secret, claimId: user.Id.ToString());
+            Console.WriteLine("Teste:" + user.Profile.IsAdmin);
+            var token = _jwtService.GenerateJwtToken(secret: _appSettings.Secret, claimId: user.Id.ToString(), user.Profile.IsAdmin);
             var userLogged = new UserLoggedDto(user.Id, Name: user.Name, Email: user.Email, Token: token.ToString());
             return userLogged;
+        }
+
+        public User Post(User objectInstance)
+        {
+            return _userRepository.Post(objectInstance);
         }
 
         public UserDto Register(RegisterUserDto registerUserDto)
@@ -49,9 +65,14 @@ namespace SixConsultApi.Service
             if (user != null)
                 throw new SixBusinessException("Email já cadastrado");
             string passwordHash = _hashService.HashPassword(registerUserDto.Password);
-            user = _userRepository.Post(new User(name: registerUserDto.Name, email: registerUserDto.Email, password: passwordHash));
+            user = _userRepository.Post(new User(name: registerUserDto.Name, email: registerUserDto.Email, password: passwordHash, profileId: registerUserDto.ProfileId));
             Console.WriteLine(user.Id);
             return _mapper.Map<UserDto>(user);
+        }
+
+        public User Update(User objectInstance)
+        {
+            return _userRepository.Update(objectInstance);
         }
     }
 }

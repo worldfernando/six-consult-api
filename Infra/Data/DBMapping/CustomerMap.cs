@@ -39,6 +39,12 @@ namespace SixConsultApi.Infra.Data.DBMapping
             builder.Property(p => p.UpdatedAt)
                     .IsRequired()
                     .HasColumnName("updated_at");
+            builder.Property(p => p.UserCreatedId)
+                .IsRequired()
+                .HasColumnName("user_created_id");
+            builder.Property(p => p.UserUpdatedId)
+                .IsRequired()
+                .HasColumnName("user_updated_id");
         }
     }
 }
