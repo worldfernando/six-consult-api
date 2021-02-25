@@ -10,7 +10,7 @@ using SixConsultApi.Infra.Data.Context;
 namespace SixConsultApi.Migrations
 {
     [DbContext(typeof(ContextDB))]
-    [Migration("20210224012600_InitialCreate")]
+    [Migration("20210225121423_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,18 +36,20 @@ namespace SixConsultApi.Migrations
                         .HasColumnType("character varying(50)")
                         .HasColumnName("contact_email");
 
-                    b.Property<long>("ContactPhone")
+                    b.Property<string>("ContactPhone")
+                        .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("bigint")
+                        .HasColumnType("character varying(50)")
                         .HasColumnName("contact_phone");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("created_at");
 
-                    b.Property<long>("FTIN")
+                    b.Property<string>("FTIN")
+                        .IsRequired()
                         .HasMaxLength(14)
-                        .HasColumnType("bigint")
+                        .HasColumnType("character varying(14)")
                         .HasColumnName("ftni");
 
                     b.Property<string>("Name")

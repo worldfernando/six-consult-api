@@ -34,18 +34,20 @@ namespace SixConsultApi.Migrations
                         .HasColumnType("character varying(50)")
                         .HasColumnName("contact_email");
 
-                    b.Property<long>("ContactPhone")
+                    b.Property<string>("ContactPhone")
+                        .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("bigint")
+                        .HasColumnType("character varying(50)")
                         .HasColumnName("contact_phone");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("created_at");
 
-                    b.Property<long>("FTIN")
+                    b.Property<string>("FTIN")
+                        .IsRequired()
                         .HasMaxLength(14)
-                        .HasColumnType("bigint")
+                        .HasColumnType("character varying(14)")
                         .HasColumnName("ftni");
 
                     b.Property<string>("Name")

@@ -10,7 +10,7 @@ namespace SixConsultApi.Domain.Notification
       RuleFor(a => a.FTIN)
         .NotEmpty()
         .WithMessage("O Cnpj não pode ser vazio")
-        .NotEqual(14)
+        .Length(14, 14)
         .WithMessage("Cnpj deve possuir 14 números");
 
       RuleFor(a => a.Name)

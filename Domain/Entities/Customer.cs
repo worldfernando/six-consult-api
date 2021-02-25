@@ -5,13 +5,13 @@ namespace SixConsultApi.Domain.Entities
 {
     public class Customer : Entity
     {    
-        public long FTIN { get; }
+        public string FTIN { get; }
         public string Name { get; }
         public string TradeName { get; }
         public string ContactEmail { get; }
-        public long ContactPhone { get; }
+        public string ContactPhone { get; }
 
-        public Customer(long FTIN, string Name, string TradeName, string ContactEmail, long ContactPhone)
+        public Customer(string FTIN, string Name, string TradeName, string ContactEmail, string ContactPhone)
         {
             this.FTIN = FTIN;
             this.Name = Name;

@@ -7,4 +7,4 @@ namespace SixConsultApi.Service.Interfaces
         T Post(T objectInstance);
         T Update(T objectInstance);
     }
-}
+}   

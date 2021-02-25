@@ -18,11 +18,11 @@ namespace SixConsultApi.Migrations
                 {
                     id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ftni = table.Column<long>(type: "bigint", maxLength: 14, nullable: false),
+                    ftni = table.Column<string>(type: "character varying(14)", maxLength: 14, nullable: false),
                     name = table.Column<string>(type: "character varying(60)", maxLength: 60, nullable: false),
                     trade_name = table.Column<string>(type: "character varying(60)", maxLength: 60, nullable: false),
                     contact_email = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    contact_phone = table.Column<long>(type: "bigint", maxLength: 50, nullable: false),
+                    contact_phone = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     updated_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
