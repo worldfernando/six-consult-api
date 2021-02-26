@@ -8,7 +8,7 @@ namespace SixConsultApi.Domain.Entities
     {
         public string Name { get; set; }
         public string Email { get; set; }
-        public string Password { get; }
+        public string Password { get; set;}
         public long ProfileId { get; set; }        
         public virtual Profile Profile { get; set; }
         public User(string name, string email, string password, long profileId)

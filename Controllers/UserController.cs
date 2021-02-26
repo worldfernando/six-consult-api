@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using SixConsultApi.Domain.Entities;
 using SixConsultApi.Dto.User;
 using SixConsultApi.Helpers;
+using SixConsultApi.Helpers.Interfaces;
 using SixConsultApi.Service;
 using SixConsultApi.Service.Interfaces;
 using System;
@@ -21,11 +22,13 @@ namespace SixConsultApi.Controllers
     {
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
+        private readonly IHashService _hashService;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UserController(IUserService userService, IMapper mapper, IHttpContextAccessor httpContextAccessor)
+        public UserController(IUserService userService, IHashService hashService, IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
             this._userService = userService;
+            this._hashService = hashService;
             this._mapper = mapper;
             this._httpContextAccessor = httpContextAccessor;
         }
@@ -163,8 +166,7 @@ namespace SixConsultApi.Controllers
                     return BadRequest(new { StatusCode = HttpStatusCode.BadRequest, message = "Usuário não localizado" });
                 if (!user.Profile.Create)
                     return BadRequest(new { StatusCode = HttpStatusCode.BadRequest, message = "Usuário não possui permissão para realizar esta operacao" });
-                var newUser = new User(name: registerUserDto.Name, email: registerUserDto.Email, password: registerUserDto.Password, profileId: registerUserDto.ProfileId);
-                _userService.Post(newUser);
+                var newUser = _userService.Register(registerUserDto);
                 return Ok(_mapper.Map<UserDto>(newUser));
             }
             catch (Exception e)
@@ -180,7 +182,7 @@ namespace SixConsultApi.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public IActionResult Put(int id, RegisterUserDto registerUserDto)
+        public IActionResult Put(int id, UpdateUserDto updateUserDto)
         {
             try
             {
@@ -194,9 +196,14 @@ namespace SixConsultApi.Controllers
                 if (updateUser == null)
                     return BadRequest(new { StatusCode = HttpStatusCode.BadRequest, message = "Usuário não localizado" });
 
-                updateUser.Name = registerUserDto.Name;
-                updateUser.Email = registerUserDto.Email;
-                updateUser.ProfileId = registerUserDto.ProfileId;
+                updateUser.Name = updateUserDto.Name;
+                updateUser.Email = updateUserDto.Email;
+                updateUser.ProfileId = updateUserDto.ProfileId;
+                Console.Write("dfsdfsdfsdf");
+                if (updateUserDto.Password != null) {
+                    updateUser.Password = _hashService.HashPassword(updateUserDto.Password);
+                }
+                Console.Write("456456456546");
                 updateUser.UpdatedAt = DateTime.Now;
 
                 _userService.Update(updateUser);

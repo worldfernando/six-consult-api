@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "+HkfTAHb4X5NMaaYZ9vjuqvEcBwM9AK9EaJ2//wvOReCoTu7ZbyyhSNHIOlTzxX8+kPRSJ9yMqjeqvuXlI/kGw==",
+  "dgSpecHash": "1ElVkgE7YqT6a9lqqAgzvtB3fceUxRxRTsn/aKkDYJXOv9ycwDle77w6hPA8SDVKwMrkMy+QEAbU/BCK+qgY1A==",
   "success": true,
   "projectFilePath": "/home/fernando/Projetos/six-consult-api/SixConsultApi.csproj",
   "expectedPackageFiles": [
     "/home/fernando/.nuget/packages/automapper/10.1.1/automapper.10.1.1.nupkg.sha512",
     "/home/fernando/.nuget/packages/bcrypt.net-next/4.0.2/bcrypt.net-next.4.0.2.nupkg.sha512",
+    "/home/fernando/.nuget/packages/extensions.fluentvalidation.br/1.0.1/extensions.fluentvalidation.br.1.0.1.nupkg.sha512",
     "/home/fernando/.nuget/packages/fluentvalidation/9.5.1/fluentvalidation.9.5.1.nupkg.sha512",
     "/home/fernando/.nuget/packages/fluentvalidation.aspnetcore/9.5.1/fluentvalidation.aspnetcore.9.5.1.nupkg.sha512",
     "/home/fernando/.nuget/packages/fluentvalidation.dependencyinjectionextensions/9.5.1/fluentvalidation.dependencyinjectionextensions.9.5.1.nupkg.sha512",

@@ -104,3 +104,4 @@ E:/Projetos/SixConsultApi/obj/Debug/net5.0/SixConsultApi.RazorTargetAssemblyInfo
 E:/Projetos/SixConsultApi/obj/Debug/net5.0/SixConsultApi.csproj.CopyComplete
 E:/Projetos/SixConsultApi/obj/Debug/net5.0/SixConsultApi.genruntimeconfig.cache
 /home/fernando/Projetos/six-consult-api/bin/Debug/net5.0/Newtonsoft.Json.dll
+/home/fernando/Projetos/six-consult-api/bin/Debug/net5.0/FluentValidation.Extensions.Br.dll

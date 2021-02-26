@@ -31,6 +31,48 @@ namespace SixConsultApi.Controllers
             this._httpContextAccessor = httpContextAccessor;
         }
 
+        /// <summary>
+        /// Return list of customers
+        /// </summary>
+        /// <param name="filter">Filtro</param>
+        /// <param name="page"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult Get(string filter, int? page, int? pageSize)
+        {
+            var query = _customerService.Query(filter);
+
+            var totalItems = query.Count();
+
+            if (page == null || pageSize == null)
+            {
+                return Ok(new
+                {
+                    items = _mapper.Map<List<CustomerDto>>(query.ToList()),
+                    page = 1,
+                    pageSize = 1,
+                    totalCount = totalItems
+                });
+            }
+
+            var totalPages = (int)Math.Ceiling(totalItems / (decimal)pageSize.Value);
+            var startIndex = (page.Value - 1) * pageSize.Value;
+            var items = query
+                .Skip(startIndex)
+                .Take(pageSize.Value)?
+                .ToList();
+
+            return Ok(new
+            {
+                items = _mapper.Map <List<CustomerDto>>(items),
+                page = page.Value,
+                pageSize = totalPages,
+                totalCount = totalItems
+            });
+            
+        }
+
         // GET api/<controller>/5
         /// <summary>
         /// Return Customer by id

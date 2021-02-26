@@ -33,7 +33,7 @@ namespace SixConsultApi.Controllers
         }
 
         /// <summary>
-        /// Return list of customers
+        /// Return list of profiles
         /// </summary>
         /// <param name="filter">Filtro</param>
         /// <param name="page"></param>

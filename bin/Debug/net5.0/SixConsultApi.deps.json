@@ -27,6 +27,7 @@
         "dependencies": {
           "AutoMapper": "10.1.1",
           "BCrypt.Net-Next": "4.0.2",
+          "Extensions.FluentValidation.Br": "1.0.1",
           "FluentValidation.AspNetCore": "9.5.1",
           "Flunt": "2.0.1",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "5.0.3",
@@ -352,6 +353,20 @@
         },
         "compile": {
           "lib/net5.0/BCrypt.Net-Next.dll": {}
+        }
+      },
+      "Extensions.FluentValidation.Br/1.0.1": {
+        "dependencies": {
+          "FluentValidation": "9.5.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/FluentValidation.Extensions.Br.dll": {
+            "assemblyVersion": "1.0.0.1",
+            "fileVersion": "1.0.0.1"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/FluentValidation.Extensions.Br.dll": {}
         }
       },
       "FluentValidation/9.5.1": {
@@ -2570,6 +2585,13 @@
       "sha512": "sha512-LyNKpIpr4GraRD9+xlTviyxxbZpF6J4xJf7DvraC1mR8PSN/KonGc4rt8C/fjkD3vaEvgA7BcvsbHFCOjgczyQ==",
       "path": "bcrypt.net-next/4.0.2",
       "hashPath": "bcrypt.net-next.4.0.2.nupkg.sha512"
+    },
+    "Extensions.FluentValidation.Br/1.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ZwLlSdrk41U2L9uPj+E5kB4zyICfuXEoBq15OgVkAOwcfH0re763dhVZbCAxOFhPAnIwFDynrfBX0mwVrpRITw==",
+      "path": "extensions.fluentvalidation.br/1.0.1",
+      "hashPath": "extensions.fluentvalidation.br.1.0.1.nupkg.sha512"
     },
     "FluentValidation/9.5.1": {
       "type": "package",

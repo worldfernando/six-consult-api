@@ -14,8 +14,8 @@ namespace SixConsultApi.Dto.Validations
             RuleFor(a => a.FTIN)
                 .NotEmpty()
                 .WithMessage("O Cnpj não pode ser vazio")
-                .Length(14, 14)
-                .WithMessage("Cnpj deve possuir 14 números");
+                .IsValidCNPJ()
+                .WithMessage("Cnpj inválido");
 
             RuleFor(a => a.Name)
                 .NotEmpty()

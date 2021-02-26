@@ -46,6 +46,10 @@
               "target": "Package",
               "version": "[4.0.2, )"
             },
+            "Extensions.FluentValidation.Br": {
+              "target": "Package",
+              "version": "[1.0.1, )"
+            },
             "FluentValidation.AspNetCore": {
               "target": "Package",
               "version": "[9.5.1, )"

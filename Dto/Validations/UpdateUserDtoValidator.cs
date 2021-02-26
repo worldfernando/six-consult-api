@@ -3,9 +3,9 @@ using SixConsultApi.Dto.User;
 
 namespace SixConsultApi.Dto.Validations
 {
-    public class RegisterUserDtoValidator : AbstractValidator<RegisterUserDto>
+    public class UpdaterUserDtoValidator : AbstractValidator<UpdateUserDto>
     {
-        public RegisterUserDtoValidator()
+        public UpdaterUserDtoValidator()
         {
             RuleFor(a => a.Email)
                 .NotEmpty()
@@ -21,9 +21,6 @@ namespace SixConsultApi.Dto.Validations
                 .Length(0, 60)
                 .WithMessage("O Nome não pode conter mais de 60 caracteres");
 
-            RuleFor(x => x.Password)
-                .NotEmpty()
-                .WithMessage("Senha não informada");
             RuleFor(x => x.ProfileId)
                 .NotEmpty()
                 .WithMessage("Perfil não informado");
