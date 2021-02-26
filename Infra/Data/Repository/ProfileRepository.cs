@@ -5,6 +5,7 @@ using SixConsultApi.Domain.Entities;
 using SixConsultApi.Helpers;
 using SixConsultApi.Infra.Data.Context;
 using SixConsultApi.Infra.Data.Repository.interfaces;
+using System;
 using System.Linq;
 
 namespace SixConsultApi.Infra.Data.Repository
@@ -22,9 +23,23 @@ namespace SixConsultApi.Infra.Data.Repository
         }
 
         override
-        public Domain.Entities.Profile GetById(int id)
+        public Domain.Entities.Profile GetById(long id)
         {
             return _context.Profile.AsQueryable().Where(x => x.Id == id).FirstOrDefault();
+        }
+
+        override
+        public IQueryable<Domain.Entities.Profile> Query(string filter){
+            var query = _context.Profile.AsQueryable();
+
+            if (!String.IsNullOrEmpty(filter))
+            {
+                filter = filter.ToUpper();
+                query = query.Where(b => b.Name.ToLower().Contains(filter.ToLower()));
+            }
+            query = query.OrderBy(b => b.Name);
+
+            return query;
         }
     }
 }

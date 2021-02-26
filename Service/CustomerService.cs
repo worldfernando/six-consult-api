@@ -32,7 +32,12 @@ namespace SixConsultApi.Service
             return _customerRepository.Post(objectInstance);
         }
 
-        public Customer Update(Customer objectInstance)
+    public IQueryable<Customer> Query(string filter)
+    {
+      return _customerRepository.Query(filter);
+    }
+
+    public Customer Update(Customer objectInstance)
         {
             return _customerRepository.Update(objectInstance);
         }

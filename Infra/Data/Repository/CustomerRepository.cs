@@ -22,7 +22,7 @@ namespace SixConsultApi.Infra.Data.Repository
         }
 
         override
-        public Customer GetById(int id)
+        public Customer GetById(long id)
         {
             return _context.Customer.AsQueryable().Where(x => x.Id == id).FirstOrDefault();
         }

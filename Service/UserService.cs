@@ -9,6 +9,7 @@ using SixConsultApi.Infra.Data.Repository.interfaces;
 using Microsoft.AspNetCore.Mvc;
 using SixConsultApi.Helpers.Interfaces;
 using System;
+using System.Linq;
 
 namespace SixConsultApi.Service
 {
@@ -48,9 +49,8 @@ namespace SixConsultApi.Service
             bool valid = _hashService.Verify(loginUserDto.password, passwordHash);
             if (!valid)
                 return null;
-            Console.WriteLine("Teste:" + user.Profile.IsAdmin);
             var token = _jwtService.GenerateJwtToken(secret: _appSettings.Secret, claimId: user.Id.ToString(), user.Profile.IsAdmin);
-            var userLogged = new UserLoggedDto(user.Id, Name: user.Name, Email: user.Email, Token: token.ToString());
+            var userLogged = new UserLoggedDto(user.Id, Name: user.Name, Email: user.Email, Token: token.ToString(), user.Profile.IsAdmin);
             return userLogged;
         }
 
@@ -59,7 +59,12 @@ namespace SixConsultApi.Service
             return _userRepository.Post(objectInstance);
         }
 
-        public UserDto Register(RegisterUserDto registerUserDto)
+    public IQueryable<User> Query(string filter)
+    {
+      return _userRepository.Query(filter);
+    }
+
+    public UserDto Register(RegisterUserDto registerUserDto)
         {
             var user = _userRepository.GetByEmail(registerUserDto.Email);
             if (user != null)

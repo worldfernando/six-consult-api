@@ -136,6 +136,12 @@ namespace SixConsultApi
             services.AddScoped<IHashService, HashService>();
             services.AddScoped<IJwtService, JwtService>();
             #endregion
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -151,9 +157,11 @@ namespace SixConsultApi
                 });
             }
             //app.UseHttpsRedirection();
+            app.UseCors("MyPolicy");
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

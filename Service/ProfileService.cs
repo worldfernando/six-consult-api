@@ -32,7 +32,12 @@ namespace SixConsultApi.Service
             return _ProfileRepository.Post(objectInstance);
         }
 
-        public Domain.Entities.Profile Update(Domain.Entities.Profile objectInstance)
+    public IQueryable<Domain.Entities.Profile> Query(string filter)
+    {
+      return _ProfileRepository.Query(filter);
+    }
+
+    public Domain.Entities.Profile Update(Domain.Entities.Profile objectInstance)
         {
             return _ProfileRepository.Update(objectInstance);
         }

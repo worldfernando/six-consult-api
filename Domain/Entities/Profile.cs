@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace SixConsultApi.Domain.Entities
 {
@@ -12,6 +13,7 @@ namespace SixConsultApi.Domain.Entities
         public bool Update { get; set; }
         public bool Delete { get; set; }
         public bool IsAdmin { get; set; }
+        [JsonIgnore]
         public virtual ICollection<User> Users { get; set; }
 
         public Profile(string name, bool create, bool update, bool delete, bool isAdmin)

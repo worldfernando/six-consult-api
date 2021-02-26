@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 namespace SixConsultApi.Infra.Data.Repository.interfaces
 {
     public interface IRepository<T>    {
-        T GetById(int id);
+
+        IQueryable<T> Query(string filter);
+        T GetById(long id);
         void BeforeDelete(T objectInstance);
         T Delete(T objectInstance);
         void AfterDelete(T objectInstance);

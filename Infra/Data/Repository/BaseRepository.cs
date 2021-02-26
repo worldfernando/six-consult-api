@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using SixConsultApi.Infra.Data.Context;
 using SixConsultApi.Infra.Data.Repository.interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace SixConsultApi.Infra.Data.Repository
             this._context = context;
             this._mapper = mapper;
         }
+        
         virtual public T Delete(T objectInstance)
         {
             BeforeDelete(objectInstance);
@@ -61,9 +63,14 @@ namespace SixConsultApi.Infra.Data.Repository
         virtual public void AfterUpdate(T objectInstance)
         {
         }
-        virtual public T GetById(int id)
+        virtual public IQueryable<T> Query(string filter)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
-    }
+
+        virtual public T GetById(long id)
+        {
+            throw new NotImplementedException();
+        }
+  }
 }
